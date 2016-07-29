@@ -14,7 +14,8 @@ defmodule BotFramework.Mixfile do
   #
   # Type "mix help compile.app" for more information
   def application do
-    [applications: [:logger]]
+    [applications: [:logger, :httpoison],
+     mod: {BotFramework, []}]
   end
 
   # Dependencies can be Hex packages:
@@ -27,6 +28,10 @@ defmodule BotFramework.Mixfile do
   #
   # Type "mix help deps" for more examples and options
   defp deps do
-    []
+    [
+      {:httpoison, "~> 0.9.0"},
+      {:joken, "~> 1.2"},
+      {:jose, "~> 1.7"}
+    ]
   end
 end

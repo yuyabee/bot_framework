@@ -7,6 +7,8 @@ defmodule BotFramework.Mixfile do
      elixir: "~> 1.3",
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
+     description: description(),
+     package: package(),
      deps: deps()]
   end
 
@@ -16,6 +18,21 @@ defmodule BotFramework.Mixfile do
   def application do
     [applications: [:logger, :httpoison],
      mod: {BotFramework, []}]
+  end
+
+  def description do
+    "Microsoft Bot Framework Client in Elixir"
+  end
+
+  def package do
+    [
+      licenses: ["MIT License"],
+      maintainers: ["Yuya Yabe"],
+      links: %{
+        "Github" => "https://github.com/yuyabee/bot_framework",
+        "Docs" => "https://hexdocs.pm/bot_framework/"
+      }
+    ]
   end
 
   # Dependencies can be Hex packages:
@@ -31,7 +48,8 @@ defmodule BotFramework.Mixfile do
     [
       {:httpoison, "~> 0.9.0"},
       {:joken, "~> 1.2"},
-      {:jose, "~> 1.7"}
+      {:jose, "~> 1.7"},
+      {:poison, "~> 2.0"}
     ]
   end
 end

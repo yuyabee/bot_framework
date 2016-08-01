@@ -42,7 +42,7 @@
       end
     ```
 
-  2. Write handler:
+  2. Write handler(See [BotFramework.Callback](lib/bot_framework/callback.ex) for more information)
     ```elixir
       defmodule BotTest.MessageController do
         use BotTest.Web, :controller

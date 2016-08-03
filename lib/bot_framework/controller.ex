@@ -16,8 +16,8 @@ defmodule BotFramework.Controller do
         res = case activity.type do
           "message" ->
             cond do
-              length(activity.attachments) > 0 -> handle_attachments(activity.attachments)
               String.length(activity.text) > 0 -> handle_message(activity.text)
+              length(activity.attachments) > 0 -> handle_attachments(activity.attachments)
             end
           _ -> handle_activity(activity)
         end

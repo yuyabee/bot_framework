@@ -13,16 +13,7 @@ defmodule BotFramework.Controller do
       def handle_activity(conn, params) do
         {:ok, activity} = params |> Activity.parse
 
-        Logger.info inspect(activity)
-
-        res = case activity.type do
-          "message" ->
-            cond do
-              String.length(activity.text) > 0 -> handle_message(activity.text)
-              length(activity.attachments) > 0 -> handle_attachments(activity.attachments)
-            end
-          _ -> handle_activity(activity)
-        end
+        res = handle_activity(activity)
 
         Client.send_message(activity, res)
 

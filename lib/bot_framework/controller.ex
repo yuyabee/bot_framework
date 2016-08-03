@@ -13,6 +13,8 @@ defmodule BotFramework.Controller do
       def handle_activity(conn, params) do
         {:ok, activity} = params |> Activity.parse
 
+        Logger.info inspect(activity)
+
         res = case activity.type do
           "message" ->
             cond do

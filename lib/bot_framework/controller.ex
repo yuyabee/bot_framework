@@ -14,7 +14,11 @@ defmodule BotFramework.Controller do
         {:ok, activity} = params |> Activity.parse
 
         res = case activity.type do
-          "message" -> handle_message(activity.text)
+          "message" ->
+            cond do
+              length(activity.attachments) > 0 -> handle_attachments(activity.attachments)
+              String.length(activity.text) > 0 -> handle_message(activity.text)
+            end
           _ -> handle_activity(activity)
         end
 

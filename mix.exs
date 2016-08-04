@@ -49,7 +49,8 @@ defmodule BotFramework.Mixfile do
       {:httpoison, "~> 0.9.0"},
       {:joken, "~> 1.2"},
       {:jose, "~> 1.7"},
-      {:poison, "~> 2.0"}
+      {:poison, "~> 2.0"},
+      {:ex_doc, ">= 0.0.0", only: :dev}
     ]
   end
 end

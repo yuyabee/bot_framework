@@ -1,10 +1,4 @@
 defmodule BotFramework.Phoenix.Controller do
-  @moduledoc '''
-  must use Phoenix.Controller
-  following functions must be defined in the module
-  handle_activity(%Activity{})
-  handle_message(String)
-  '''
   defmacro __using__(_) do
     quote do
       alias BotFramework.{Client}

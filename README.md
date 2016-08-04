@@ -8,7 +8,7 @@
 
     ```elixir
     def deps do
-      [{:bot_framework, "~> 0.1.0"}]
+      [{:bot_framework, "~> 0.2.0"}]
     end
     ```
 

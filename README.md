@@ -33,9 +33,10 @@
   1. Define route:
     ```elixir
       defmodule BotTest.Router do
-        use BotFramework.Router
+        use BotFramework.Phoenix.Router
 
-        # other stuff
+        # ... other stuff ...
+
         scope "/api", BotTest do
           bf_handler "/handle_message", MessageController
         end
@@ -46,17 +47,14 @@
     ```elixir
       defmodule BotTest.MessageController do
         use BotTest.Web, :controller
-        use BotFramework.Controller
+        use BotFramework.Phoenix.Controller
 
         alias BotFramework.Models.{Activity}
 
-        # handle activity other than message
-        def handle_activity(%Activity{} = _activity), do: nil
-
-        # when the activity is message
-        def handle_message(text) do
+        # handle text message
+        def handle_activity(%Activity{type: "message", text: text}) when is_bitstring(text) do
           case text |> String.downcase do
-            "hi" -> [text: "Hi this is elixir_api_bot"]
+            "hi" -> [text: "Hi this is a bot"]
             "how are you?" -> [text: "Good. Thanks. And you?"]
             "hero" ->
               [text: "Hero sample", attachments: [%{
@@ -77,6 +75,12 @@
             "fine" -> [text: "Okay"]
             _ -> [text: "Pardon me?"]
           end
+        end
+
+        # handle attachments
+        def handle_activity(%Activity{type: "message", text: nil, attachments: attachments}) do
+          # do something with the attachments
+          [text: "Received attachment"]
         end
       end
     ```

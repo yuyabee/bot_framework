@@ -1,4 +1,4 @@
-defmodule BotFramework.Controller do
+defmodule BotFramework.Phoenix.Controller do
   @moduledoc '''
   must use Phoenix.Controller
   following functions must be defined in the module

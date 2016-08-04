@@ -1,4 +1,4 @@
-defmodule BotFramework.Router do
+defmodule BotFramework.Phoenix.Router do
   defmacro __using__(_) do
     quote do
       import unquote(__MODULE__)

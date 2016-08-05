@@ -2,9 +2,10 @@ defmodule BotFramework.Client do
   require Logger
 
   alias BotFramework.{AuthenticationServer}
+  alias BotFramework.Models.{Activity}
   alias HTTPoison.{Response}
 
-  def send_message(%{
+  def send_message(%Activity{
     type: type,
     serviceUrl: service_url,
     channelId: channel_id,
@@ -14,14 +15,14 @@ defmodule BotFramework.Client do
     recipient: recipient
   } = activity, res) do
 
-    json_data = %{
+    payload = %{
       channelId: channel_id,
       conversation: activity.conversation,
       from: recipient,
       recipient: from,
       serviceUrl: service_url,
       type: type,
-    } |> Map.merge(res |> Enum.chunk(res |> length) |> List.flatten |> Enum.into(%{}))
+    } |> Kernel.struct(res)
       |> Poison.encode!
 
     url =
@@ -29,7 +30,7 @@ defmodule BotFramework.Client do
        URI.encode_www_form(conversation_id), "activities", URI.encode_www_form(activity_id)]
       |> Enum.join("/")
 
-    case HTTPoison.post(url, json_data, headers) do
+    case HTTPoison.post(url, payload, headers) do
       {:ok, %Response{status_code: status_code, body: body, headers: res_headers}} ->
         case status_code do
           sc when sc in 200..202 ->
@@ -40,7 +41,7 @@ defmodule BotFramework.Client do
             Logger.info inspect(headers)
             Logger.info inspect(activity)
             Logger.info "received data"
-            Logger.info inspect(json_data)
+            Logger.info inspect(payload)
             Logger.info status_code
             Logger.info inspect(res_headers)
             Logger.info inspect(body)

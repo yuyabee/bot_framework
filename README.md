@@ -1,6 +1,6 @@
 # BotFramework
 
-[Microsoft Bot Framework (V3)](https://dev.botframework.com/) Client in Elixir.
+[Microsoft Bot Framework (V3)](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-overview-introduction?view=azure-bot-service-4.0) Client in Elixir.
 
 ## Installation
 

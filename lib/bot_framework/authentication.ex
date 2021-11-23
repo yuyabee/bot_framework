@@ -4,7 +4,7 @@ defmodule BotFramework.Authentication do
   alias HTTPoison.{Response}
   alias BotFramework.AuthenticationServer
 
-  @jwt_endpoint "https://login.microsoftonline.com/common/oauth2/v2.0/token"
+  @jwt_endpoint "https://login.microsoftonline.com/botframework.com/oauth2/v2.0/token"
   @verification_endpoint "https://api.aps.skype.com/v1"
 
   # TODO: token must be updated before expires
@@ -13,7 +13,7 @@ defmodule BotFramework.Authentication do
        grant_type: "client_credentials",
        client_id: Application.get_env(:bot_framework, :client_id),
        client_secret: Application.get_env(:bot_framework, :client_secret),
-       scope: "https://graph.microsoft.com/.default"
+       scope: "https://api.botframework.com/.default"
      ]}, %{"Content-type" => "application/x-www-form-urlencoded"}) do
       {:ok, %Response{body: body}} ->
         body |> Poison.decode!
